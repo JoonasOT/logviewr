@@ -3,7 +3,7 @@ import WebSocket from "ws"
 import express from "express"
 import expressWs from "express-ws"
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 
 class WsStream extends Writable {
     private readonly socket: WebSocket
@@ -13,7 +13,7 @@ class WsStream extends Writable {
     }
 
     override _write(chunk: Buffer, _encoding: BufferEncoding, callback: (error?: Error | null) => void): void {
-        this.socket.send(JSON.stringify(chunk.toJSON()), callback);
+        this.socket.send(chunk.toString(), callback);
     }
 }
 
@@ -23,7 +23,11 @@ app.use("/", express.static("dist/browser"));
 
 app.ws("/ws", (socket) => {
     console.info("CONNECTED!");
-    process.stdin.pipe(new WsStream(socket));
+    const stream = process.stdin.pipe(new WsStream(socket));
+    socket.once("close", () => {
+        console.info("DISCONNECTED!");
+        stream.emit("close");
+    })
 })
 
 app.listen(port, (err) => {

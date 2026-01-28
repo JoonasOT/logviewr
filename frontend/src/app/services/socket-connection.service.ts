@@ -8,12 +8,12 @@ export type Message = string;
 
 @Injectable()
 export class SocketConnectionService {
-  private socket: WebSocketSubject<{ type:"Buffer", data: number[] }> = webSocket(environment.WEBSOCKET_URL.toString());
+  private socket: WebSocketSubject<Message> = webSocket({ url: environment.WEBSOCKET_URL.toString(), deserializer: (event) => event.data.toString()});
 
   constructor() {}
 
   get observable(): Observable<Message> {
-    return this.socket.asObservable().pipe(map(msg => Buffer.from(msg.data).toString()));
+    return this.socket.asObservable()
   }
 
   disconnect(): void {
