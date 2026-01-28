@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, input, OnDestroy, OnInit } from '@angular/core';
 import { Message, SocketConnectionService } from '../../services/socket-connection.service';
 import { Subscription, filter } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Subscription, filter } from 'rxjs';
   providers: [SocketConnectionService]
 })
 export class LogpanelComponent implements OnInit, OnDestroy{
-  @Input({required: true})pattern!: string;
+  pattern = input.required<RegExp>();
   
   readonly messages: Message[] = []
   private subscription?: Subscription
@@ -20,7 +20,7 @@ export class LogpanelComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.subscription = this.socketService
                             .observable
-                            .pipe(filter(msg => !!(new RegExp(this.pattern, "g").exec(msg))))
+                            .pipe(filter(msg => !!this.pattern().exec(msg)))
                             .subscribe(msg => this.messages.push(msg))
   }
   

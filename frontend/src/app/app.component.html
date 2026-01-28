@@ -1,3 +1,5 @@
 <main class="main">
-  <logpanel pattern=".*"/>
+  @for (pattern of patterns; track $index) {
+    <logpanel [pattern]="pattern"/>
+  }
 </main>

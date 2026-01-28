@@ -8,4 +8,5 @@ import { LogpanelComponent } from './components/logpanel/logpanel.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  readonly patterns: RegExp[] = [/.*/g];
 }
