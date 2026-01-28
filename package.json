@@ -1,0 +1,29 @@
+{
+  "name": "logviewr",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/JoonasOT/logviewr#readme",
+  "bugs": {
+    "url": "https://github.com/JoonasOT/logviewr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoonasOT/logviewr.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "",
+  "scripts": {
+    "build": "cd ./frontend && ng build && cd ..",
+    "copy-build": "cp -r ./frontend/dist ./backend",
+    "copy-build:win": "copy ./frontend/dist ./backend",
+    "serve": "cd ./backend && npm start && cd ..",
+    "start": "npm run build && npm run copy-build && npm run serve",
+    "clean-frontend": "rm -r ./frontend/dist",
+    "clean-backend": "rm -r ./backend/dist",
+    "clean": "npm run clean-frontend && npm run clean-backend",
+    "run-generator": "node ./tests/generator.ts",
+    "test": "npm run run-generator | npm run serve"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Joonas Tuominen",
+  "type": "module",
+  "main": "main.ts",
+  "scripts": {
+    "start": "node main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-ws": "^5.0.2",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/express-ws": "^3.0.6",
+    "@types/node": "^25.0.10",
+    "@types/ws": "^8.18.1"
+  }
+}
